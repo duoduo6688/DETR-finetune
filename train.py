@@ -18,7 +18,7 @@ PARAMS = {
         "experiment_name": "detr_train_v4_cont_backbone",
         "model_type": "resnet-50",
         "augmentations": ["hflip", "blur"],
-        "accumulate_grad_batches": None,
+        "accumulate_grad_batches": True,
     }
 
 

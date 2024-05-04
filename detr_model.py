@@ -27,7 +27,7 @@ class Detr(pl.LightningModule):
             for param in self.parameters():
                 param.requires_grad = True
         print(self.model)
-        self.map_metric = MeanAveragePrecision(box_format="cxcywh", iou_type="bbox", class_metrics=False).to(torch.device("mps"))
+        self.map_metric = MeanAveragePrecision(box_format="cxcywh", iou_type="bbox", class_metrics=False).to(torch.device("cuda"))
     
     def load_pretrained_num_queries(self, model_type):
         model_weights = {

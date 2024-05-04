@@ -9,8 +9,8 @@ import random
 
 
 class SKUDetection(torchvision.datasets.CocoDetection):
-    def __init__(self, img_folder, processor, train=True):
-        ann_file = os.path.join(img_folder, "custom_train.json" if train else "custom_val.json")
+    def __init__(self, img_folder, ann_folder, processor, train=True):
+        ann_file = os.path.join(ann_folder, "custom_train.json" if train else "custom_val.json")
         super().__init__(img_folder, ann_file)
         self.train = train
         self.processor = processor
@@ -87,8 +87,8 @@ class DataModule(pl.LightningDataModule):
 
     def setup(self, stage: str):
         if stage == "fit":
-            self.data_train = SKUDetection("../SKU110K_fixed/data", self.processor, True)
-            self.data_val = SKUDetection("../SKU110K_fixed/data", self.processor, False)
+            self.data_train = SKUDetection("../SKU110K_fixed/images", "../SKU110K_fixed/data", self.processor, True)
+            self.data_val = SKUDetection("../SKU110K_fixed/images", "../SKU110K_fixed/data", self.processor, False)
 
     def train_dataloader(self):
         return make_dataloader(self.data_train, "train", batch_size=self.batch_size, num_workers=6, processor=self.processor)
