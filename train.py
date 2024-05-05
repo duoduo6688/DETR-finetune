@@ -45,7 +45,7 @@ def main(wandb_logger, batch_size, experiment_name, lr, lr_backbone, weight_deca
             benchmark=True,
             callbacks=callbacks,
             logger=wandb_logger,
-            accumulate_grad_batches=PARAMS["accumulate_grad_batches"],
+            accumulate_grad_batches=PARAMS["accumulate_grad_batchesches"],
         )
     else:
         trainer = pl.Trainer(
@@ -56,8 +56,10 @@ def main(wandb_logger, batch_size, experiment_name, lr, lr_backbone, weight_deca
             callbacks=callbacks,
             logger=wandb_logger,
         )
+    ckpt_path = f"{output_folder}/last.ckpt"
     trainer.fit(model,
                 sku_data_module,
+                ckpt_path=ckpt_path,
                 ) 
 
 if __name__ == "__main__":
