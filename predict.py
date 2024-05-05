@@ -15,9 +15,14 @@ def plot_results(pil_img, scores, labels, boxes):
     plt.savefig("temp.jpg")
 
 def main():
-    url = "https://github.com/Isalia20/DETR-finetune/blob/main/IMG_3507.jpg?raw=true"
-    image = Image.open(requests.get(url, stream=True).raw)
+    #url = "https://github.com/Isalia20/DETR-finetune/blob/main/IMG_3507.jpg?raw=true"
+    url = "./IMG_3507.jpg"
+    print(f"open image: {url}")
+    #image = Image.open(requests.get(url, stream=True).raw)
+    image = Image.open(url)
+    print("image open success")
     image = ImageOps.exif_transpose(image)
+    print("image exif transposr success")
 
     # you can specify the revision tag if you don't want the timm dependency
     processor = DetrImageProcessor.from_pretrained("facebook/detr-resnet-50", revision="no_timm")
