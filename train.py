@@ -60,7 +60,9 @@ def main(wandb_logger, batch_size, experiment_name, lr, lr_backbone, weight_deca
     trainer.fit(model,
                 sku_data_module,
                 ckpt_path=ckpt_path,
-                ) 
+                )
+    print("trainer fit done")
+    torch.save(model.state_dict(), f"{output_folder}/model.pt")
 
 if __name__ == "__main__":
     torch.set_float32_matmul_precision('medium')
