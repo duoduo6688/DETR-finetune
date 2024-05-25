@@ -63,6 +63,9 @@ def main(wandb_logger, batch_size, experiment_name, lr, lr_backbone, weight_deca
                 )
     print("trainer fit done")
     torch.save(model.state_dict(), f"{output_folder}/model.pt")
+    print("save model.pt success")
+    torch.save(model, f"{output_folder}/pytorch_model.bin")
+    print("save pytorch_model.bin success")
 
 if __name__ == "__main__":
     torch.set_float32_matmul_precision('medium')
